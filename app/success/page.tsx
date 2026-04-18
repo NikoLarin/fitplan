@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { WeeklyPlan } from '@/lib/types';
+import { SuccessScreen } from '@/components/success/SuccessScreen';
 
 export default function SuccessPage() {
   const params = useSearchParams();
@@ -40,20 +41,18 @@ export default function SuccessPage() {
         setLoading(false);
       }
     }
+
     run();
   }, [sessionId]);
 
   return (
-    <main className="min-h-screen p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-3">Payment successful 🎉</h1>
-      {loading && <p>Generating your complete plan and PDF...</p>}
-      {error && <p className="text-red-400">{error}</p>}
-      {plan && (
-        <div className="space-y-3">
-          <p>{plan.userSummary}</p>
-          <p>PDF download should start automatically. We also emailed it (if email is configured).</p>
-        </div>
-      )}
+    <main className="min-h-screen p-6 sm:p-10">
+      <section className="mx-auto max-w-3xl space-y-4">
+        <h1 className="text-4xl font-black">Payment successful 🎉</h1>
+        {loading && <p className="rounded-xl border border-cyan-400/30 bg-cyan-500/10 p-3 text-sm">Finalizing your AI plan and preparing PDF...</p>}
+        {error && <p className="text-red-400">{error}</p>}
+        {!loading && !error && <SuccessScreen plan={plan} />}
+      </section>
     </main>
   );
 }

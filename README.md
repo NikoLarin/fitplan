@@ -4,12 +4,20 @@ AI-powered micro-SaaS that generates personalized training + diet plans in ~60 s
 
 ## Stack
 - Next.js 15 + TypeScript (App Router)
-- Tailwind + lightweight shadcn-style UI components
+- Tailwind + shadcn-style UI structure
 - Supabase (plan request + purchased plans data)
 - Stripe Checkout (one-time unlock)
 - OpenAI/Anthropic pluggable provider
 - PDF-lib for server-side generated downloadable plan PDF
 - Optional Resend email delivery
+
+## UX flow (conversion-first)
+1. Hero with clear value proposition + CTA.
+2. Multi-step guided consultation wizard with progress bar.
+3. Live preview card updates as user configures plan.
+4. Free preview generation.
+5. Upgrade panel with value stack + one-time price.
+6. Stripe checkout → success screen → PDF auto-download.
 
 ## Quick start
 1. Install deps:
@@ -30,9 +38,9 @@ AI-powered micro-SaaS that generates personalized training + diet plans in ~60 s
 
 ## Payment test flow (Stripe test mode)
 1. Set `STRIPE_SECRET_KEY` with test key.
-2. Start app and fill form.
-3. Click **Generate Free Preview**.
-4. Click **Unlock Full 7-Day Plan**.
+2. Start app and fill wizard inputs.
+3. Generate free preview.
+4. Click unlock and complete checkout.
 5. In Stripe checkout use test card `4242 4242 4242 4242` with any future date/CVC.
 6. On success page, backend verifies payment, generates full plan, and triggers PDF download.
 
